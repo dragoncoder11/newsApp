@@ -10,9 +10,10 @@ class CategoryItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(right: 15),
       child: Container(
-        height: MediaQuery.of(context).size.height * .13,
-        width: MediaQuery.of(context).size.width * .4,
+        height: MediaQuery.of(context).size.height * .16,
+        width: MediaQuery.of(context).size.width * .44,
         decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
           image: DecorationImage(
               image: AssetImage(
                 image,
@@ -20,7 +21,7 @@ class CategoryItem extends StatelessWidget {
               fit: BoxFit.cover),
         ),
         child: Center(
-          child: Text(categoryName),
+          child: Text(categoryName,style:const TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.bold),),
         ),
       ),
     );

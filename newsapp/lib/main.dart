@@ -18,7 +18,7 @@ class NewsApp extends StatelessWidget {
       initialRoute: SplashPage.id,
       routes: {
         SplashPage.id: (context) => const SplashPage(),
-        NewsPage.id: (context) => const NewsPage(),
+        NewsPage.id: (context) =>  NewsPage(),
       },
     );
   }
