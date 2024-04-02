@@ -12,7 +12,7 @@ class NewsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<NewsCubit>(
-      create: (context) => NewsCubit(newsRepoImplement)..fetchNews(category: 'general'),
+      create: (context) => NewsCubit(newsRepoImplement)..fetchNews(category: 'everything'),
       child: const Scaffold(
         body: NewsPageBody(),
       ),

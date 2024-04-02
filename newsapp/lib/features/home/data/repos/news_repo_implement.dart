@@ -18,7 +18,7 @@ class NewsRepoImplement implements NewsRepo{
   return right(news);
 }  catch (e) {
   // TODO
-return left(e.toString()as Error);
+return left(e.toString() as Error);
 }
 
   }

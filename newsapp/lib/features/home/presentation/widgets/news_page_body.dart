@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newsapp/features/home/presentation/manager/cubit/news_cubit.dart';
+import 'package:newsapp/features/home/presentation/views/details.dart';
 import 'package:newsapp/features/home/presentation/widgets/category_item.dart';
 import 'package:newsapp/features/home/presentation/widgets/news_item.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class NewsPageBody extends StatelessWidget {
   const NewsPageBody({super.key});
@@ -22,11 +24,11 @@ class NewsPageBody extends StatelessWidget {
     ];
     return BlocBuilder<NewsCubit, NewsState>(
       builder: (context, state) {
-        if(state is NewsSuccess){
+        if (state is NewsSuccess) {
           return SafeArea(
-          child: CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(
+            child: CustomScrollView(
+              slivers: [
+                /*     SliverToBoxAdapter(
                 child: SizedBox(
                   height: MediaQuery.of(context).size.height * .16,
                   child: Padding(
@@ -39,29 +41,60 @@ class NewsPageBody extends StatelessWidget {
                         }),
                   ),
                 ),
-              ),
-              const SliverToBoxAdapter(
-                child: SizedBox(
-                  height: 12,
+              ), */
+                const SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: 12,
+                  ),
                 ),
-              ),
-              SliverFillRemaining(
-                child: ListView.builder(itemCount: state.news.length,itemBuilder: (context, index) {
-                  return  NewsItem(
-                    title: state.news[index].title,
-                    image:  state.news[index].image,
-                  );
-                }),
-              ),
-            ],
-          ),
-        );
-        }
-        else if(state is NewsFailure){
+                const SliverToBoxAdapter(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'News ',
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        'Cloud',
+                        style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.amber),
+                      ),
+                    ],
+                  ),
+                ),
+                SliverFillRemaining(
+                  child: ListView.builder(
+                      itemCount: state.news.length,
+                      itemBuilder: (context, index) {
+                        var c = state.news[index];
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.of(context)
+                                .pushNamed(Details.id, arguments: c);
+                          },
+                          child: NewsItem(
+                            title: state.news[index].title!,
+                            image: state.news[index].image ??
+                                'https://th.bing.com/th/id/OIP.3dQJdd3puXqdw9pDmNrK4QHaH0?rs=1&pid=ImgDetMain',
+                          ),
+                        );
+                      }),
+                ),
+              ],
+            ),
+          );
+        } else if (state is NewsFailure) {
           return Text(state.errMessage);
-        }
-        else if(state is NewsLoading){
-          return const Center(child: CircularProgressIndicator(),);
+        } else if (state is NewsLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         }
         return const Text('data');
       },

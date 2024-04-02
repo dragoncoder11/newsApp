@@ -8,7 +8,7 @@ class NewsService {
   Future getNews({required String category}) async {
     try {
       var response = await dio.get(
-          '${baseUrl}top-headlines?country=us&category=$category&apiKey=$apiKey');
+          '${baseUrl}everything?q=$category&apiKey=$apiKey');
       var data = response.data;
       return data;
     } on Exception catch (e) {

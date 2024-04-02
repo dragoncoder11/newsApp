@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newsapp/features/home/presentation/views/details.dart';
 import 'package:newsapp/features/home/presentation/views/news_page.dart';
 import 'package:newsapp/splash_page.dart';
 
@@ -18,7 +19,8 @@ class NewsApp extends StatelessWidget {
       initialRoute: SplashPage.id,
       routes: {
         SplashPage.id: (context) => const SplashPage(),
-        NewsPage.id: (context) =>  NewsPage(),
+        NewsPage.id: (context) => NewsPage(),
+        Details.id: (context) => const Details(),
       },
     );
   }
